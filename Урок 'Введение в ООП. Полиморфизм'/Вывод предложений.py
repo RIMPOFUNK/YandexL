@@ -27,7 +27,7 @@ class RightParagraph(Paragraph):
         line = ''
         for word in self.words:
             if not line:
-                line += word    
+                line += word
             elif len(line) + len(word) + 1 <= self.width:
                 line += ' ' + word
             else:
