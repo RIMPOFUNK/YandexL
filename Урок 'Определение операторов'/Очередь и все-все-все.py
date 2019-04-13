@@ -1,4 +1,7 @@
 class Queue:
+    def __copy__(self):
+        return self
+
     def __init__(self, *args):
         self.lst = args
         self.lst = list(self.lst)
@@ -50,7 +53,29 @@ class Queue:
         return Queue(*self.lst[n:])
 
     def __call__(self, *args, **kwargs):
-        return Queue(list(args[0].lst[1:]))
+        return self
 
     def __next__(self):
         return Queue(*list(self.lst[1:]))
+
+    def __iadd__(self, other):
+        return Queue(*list(self.lst + other.lst))
+
+    def __deepcopy__(self):
+        return self
+
+
+q1 = Queue(*range(1, 5))
+print(q1)
+q1.append(*range(5, 7))
+print(q1)
+q2 = q1 >> 3
+print(q1)
+print(q2)
+q3 = q1 >> 20
+print(q3)
+q4 = q1
+q1 += q2
+print(q1)
+print(q4)
+print(q1 + q4)
