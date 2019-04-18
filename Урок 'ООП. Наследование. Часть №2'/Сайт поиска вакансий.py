@@ -3,7 +3,7 @@ class Profile:
         self.name = name
 
     def info(self):
-        pass
+        return ''
 
     def describe(self):
         return self.info()
@@ -15,7 +15,7 @@ class Vacancy(Profile):
         self.money = money
 
     def info(self):
-        return f"Предлагаемая зарплата: {self.money}\n"
+        return f"Предлагаемая зарплата: {self.money}"
 
 
 class Resume(Profile):
@@ -24,4 +24,4 @@ class Resume(Profile):
         self.sta = sta
 
     def info(self):
-        return f"Стаж работы: {self.sta}\n"
+        return f"Стаж работы: {self.sta}"

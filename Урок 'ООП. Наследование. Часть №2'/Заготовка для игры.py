@@ -52,15 +52,32 @@ class MainHero(BaseCharacter):
         self.name = name
         self.hp = hp
         self.weapon = []
-    def hit(self,target):
+
+    def hit(self, target):
         if len(self.weapon) == 0:
             return "Я безоружен"
         else:
             if isinstance(target, BaseCharacter):
-                pass
+                target.hp -= self.weapon_now.damage
             else:
                 return "Могу ударить только Врага"
-    def add_weapon(self,weapon):
-        self.weapon.append(weapon)
+
+    def add_weapon(self, weapon):
+        if isinstance(weapon, Weapon):
+            if len(self.weapon) == 0:
+                self.weapon_now = weapon
+                self.weapon.append(weapon)
+            else:
+                self.weapon.append(weapon)
+            print("Подобрал " + str(weapon.name))
+        else:
+            print("Это не оружие")
+
     def next_weapon(self):
-        pass
+        if len(self.weapon) == 0:
+            print("Я безоружен")
+        elif len(self.weapon) == 1:
+            print("У меня только одно оружие")
+        else:
+            indx = self.weapon.index(self.weapon_now)
+            self.weapon_now = self.weapon[indx + 1]
